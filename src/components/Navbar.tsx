@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ShoppingBag, User, Menu, X } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, X, ChevronDown } from "lucide-react";
 
-const links = ["Home", "Collection", "New Arrivals", "Men", "Women", "Sale", "About", "Contact"];
+const links = ["Home", "Collection", "New Arrivals", "Sale", "About", "Contact"];
+
+const dropdownMenus: Record<string, string[]> = {
+  Collection: ["Running", "Basketball", "Lifestyle", "Training"],
+};
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,19 +39,44 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <ul className="hidden items-center gap-7 lg:flex">
-            {links.map((l) => (
-              <li key={l}>
-                <a
-                  href={`#${l.toLowerCase().replace(/\s+/g, "-")}`}
-                  className={`group relative text-sm font-medium transition-colors ${
-                    l === "Sale" ? "text-crimson" : "text-white/70 hover:text-white"
-                  }`}
-                >
-                  {l}
-                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-crimson transition-all duration-300 group-hover:w-full" />
-                </a>
-              </li>
-            ))}
+            {links.map((l) => {
+              const hasDropdown = dropdownMenus[l];
+              return (
+                <li key={l} className={hasDropdown ? "group relative py-4" : "py-4"}>
+                  {hasDropdown ? (
+                    <>
+                      <button className="group/btn relative flex items-center gap-1 text-sm font-medium text-white/70 transition-colors hover:text-white">
+                        {l}
+                        <ChevronDown size={14} className="transition-transform duration-300 group-hover:-rotate-180" />
+                        <span className="absolute -bottom-1 left-0 h-px w-0 bg-crimson transition-all duration-300 group-hover/btn:w-full" />
+                      </button>
+                      {/* Dropdown Menu */}
+                      <div className="absolute left-0 top-full mt-0 w-48 rounded-xl glass-strong p-2 opacity-0 invisible transition-all duration-300 group-hover:visible group-hover:opacity-100 group-hover:translate-y-1">
+                        {hasDropdown.map((cat) => (
+                          <a
+                            key={cat}
+                            href={`#${cat.toLowerCase().replace(/\s+/g, "-")}`}
+                            className="block rounded-lg px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                          >
+                            {cat}
+                          </a>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <a
+                      href={`#${l.toLowerCase().replace(/\s+/g, "-")}`}
+                      className={`group/link relative text-sm font-medium transition-colors ${
+                        l === "Sale" ? "text-crimson" : "text-white/70 hover:text-white"
+                      }`}
+                    >
+                      {l}
+                      <span className="absolute -bottom-1 left-0 h-px w-0 bg-crimson transition-all duration-300 group-hover/link:w-full" />
+                    </a>
+                  )}
+                </li>
+              );
+            })}
           </ul>
 
           {/* Icons */}
@@ -59,7 +88,7 @@ export default function Navbar() {
               <User size={19} />
             </button>
             <button className="relative flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white">
-              <ShoppingBag size={19} />
+              <ShoppingCart size={19} />
               <span className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-crimson text-[9px] font-bold text-white">3</span>
             </button>
             <button
