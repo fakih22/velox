@@ -13,14 +13,40 @@ const dropdownMenus: Record<string, string[]> = {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
   const { cartCount, favoritesCount } = useShop();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      
+      // Track active section
+      const sectionIds = links.map(l => l.toLowerCase().replace(/\s+/g, "-"));
+      // Check if we are at the top of the page
+      if (window.scrollY < 100) {
+        setActiveSection("home");
+        return;
+      }
+      
+      let current = activeSection;
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // If the element is within the top half of the screen
+          if (rect.top <= 300 && rect.bottom >= 300) {
+            current = id;
+          }
+        }
+      }
+      if (current !== activeSection) {
+        setActiveSection(current);
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [activeSection]);
 
   return (
     <>
@@ -70,7 +96,7 @@ export default function Navbar() {
                     <a
                       href={`#${l.toLowerCase().replace(/\s+/g, "-")}`}
                       className={`group/link relative text-sm font-medium transition-colors ${
-                        l === "Sale" ? "text-crimson" : "text-white/70 hover:text-white"
+                        activeSection === l.toLowerCase().replace(/\s+/g, "-") ? "text-crimson" : "text-white/70 hover:text-white"
                       }`}
                     >
                       {l}
@@ -153,7 +179,7 @@ export default function Navbar() {
                       href={`#${l.toLowerCase().replace(/\s+/g, "-")}`}
                       onClick={() => setOpen(false)}
                       className={`block rounded-xl px-4 py-3 text-lg font-medium transition-colors hover:bg-white/5 ${
-                        l === "Sale" ? "text-crimson" : "text-white/80"
+                        activeSection === l.toLowerCase().replace(/\s+/g, "-") ? "text-crimson" : "text-white/80"
                       }`}
                     >
                       {l}
