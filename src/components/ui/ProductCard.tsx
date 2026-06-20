@@ -93,11 +93,11 @@ export default function ProductCard({ product, index = 0, isFavoritePage = false
           ))}
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-y-3 gap-x-2">
-          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-            <span className="text-lg font-bold text-white">{formatPrice(product.price)}</span>
+        <div className="mt-4 flex items-end justify-between gap-2">
+          <div className="flex flex-col gap-0.5">
+            <span className="text-base sm:text-lg font-bold text-white leading-none">{formatPrice(product.price)}</span>
             {product.oldPrice && (
-              <span className="text-xs text-white/35 line-through">{formatPrice(product.oldPrice)}</span>
+              <span className="text-[10px] sm:text-xs text-white/40 line-through leading-none">{formatPrice(product.oldPrice)}</span>
             )}
           </div>
           <button
@@ -108,11 +108,11 @@ export default function ProductCard({ product, index = 0, isFavoritePage = false
                 toggleFavorite(product.id);
               }
             }}
-            className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 shadow-md ${
+            className={`flex-shrink-0 flex items-center gap-1.5 rounded-full px-3 sm:px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 shadow-md ${
               isFavoritePage ? "bg-white/10 hover:bg-crimson border border-white/20" : "bg-crimson hover:bg-crimson-deep"
             }`}
           >
-            {isFavoritePage ? <ShoppingCart size={14} /> : <ShoppingBag size={14} />} 
+            <ShoppingCart size={14} /> 
             {isFavoritePage ? "Move to Cart" : "Add"}
           </button>
         </div>

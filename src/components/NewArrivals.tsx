@@ -74,9 +74,14 @@ export default function NewArrivals() {
                   <StarRating rating={p.rating} />
                 </div>
                 <h3 className="mt-2 text-xl font-semibold text-white">{p.name}</h3>
-                <div className="mt-4 flex flex-wrap items-center justify-between gap-x-2 gap-y-3">
-                  <span className="text-lg font-bold text-white">{formatPrice(p.price)}</span>
-                  <button className="rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 hover:bg-crimson">
+                <div className="mt-4 flex items-end justify-between gap-2">
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-base sm:text-lg font-bold text-white leading-none">{formatPrice(p.price)}</span>
+                    {p.oldPrice && (
+                      <span className="text-[10px] sm:text-xs text-white/40 line-through leading-none">{formatPrice(p.oldPrice)}</span>
+                    )}
+                  </div>
+                  <button className="flex-shrink-0 rounded-full bg-white/10 px-3 sm:px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 hover:bg-crimson">
                     Shop Now
                   </button>
                 </div>
