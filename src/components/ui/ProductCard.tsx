@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Heart, ShoppingBag, Eye } from "lucide-react";
 import type { Product } from "../../data/products";
 import StarRating from "./StarRating";
+import { useShop } from "../../context/ShopContext";
 
 interface ProductCardProps {
   product: Product;
@@ -9,6 +10,9 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, index = 0 }: ProductCardProps) {
+  const { addToCart, toggleFavorite, favorites } = useShop();
+  const isFavorite = favorites.includes(product.id);
+  
   const discount = product.oldPrice
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
     : 0;
@@ -36,8 +40,16 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         )}
 
         {/* Wishlist */}
-        <button className="absolute bottom-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full glass-strong text-white/70 transition-all hover:scale-110 hover:text-crimson">
-          <Heart size={17} />
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            toggleFavorite(product.id);
+          }}
+          className={`absolute bottom-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full glass-strong transition-all hover:scale-110 ${
+            isFavorite ? "text-crimson" : "text-white/70 hover:text-crimson"
+          }`}
+        >
+          <Heart size={17} className={isFavorite ? "fill-crimson" : ""} />
         </button>
 
         {/* Quick view overlay */}
@@ -87,7 +99,13 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               <span className="text-sm text-white/35 line-through">${product.oldPrice}</span>
             )}
           </div>
-          <button className="flex items-center gap-1.5 rounded-full bg-crimson px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 hover:bg-crimson-deep shadow-md">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              addToCart(product.id);
+            }}
+            className="flex items-center gap-1.5 rounded-full bg-crimson px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 hover:bg-crimson-deep shadow-md"
+          >
             <ShoppingBag size={14} /> Add
           </button>
         </div>

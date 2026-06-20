@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ShoppingCart, User, Menu, X, ChevronDown } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, X, ChevronDown, Heart } from "lucide-react";
+import Link from "next/link";
+import { useShop } from "../context/ShopContext";
 
 const links = ["Home", "Collection", "New Arrivals", "Sale", "About", "Contact"];
 
@@ -11,6 +13,7 @@ const dropdownMenus: Record<string, string[]> = {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { cartCount, favoritesCount } = useShop();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -87,10 +90,22 @@ export default function Navbar() {
             <button className="hidden h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white sm:flex">
               <User size={19} />
             </button>
-            <button className="relative flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white">
+            <Link href="/favorites" className="relative flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white">
+              <Heart size={19} />
+              {favoritesCount > 0 && (
+                <span className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-crimson text-[9px] font-bold text-white">
+                  {favoritesCount}
+                </span>
+              )}
+            </Link>
+            <Link href="/cart" className="relative flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white">
               <ShoppingCart size={19} />
-              <span className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-crimson text-[9px] font-bold text-white">3</span>
-            </button>
+              {cartCount > 0 && (
+                <span className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-crimson text-[9px] font-bold text-white">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
             <button
               onClick={() => setOpen(true)}
               className="flex h-10 w-10 items-center justify-center rounded-full text-white hover:bg-white/10 lg:hidden"
