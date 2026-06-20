@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Heart, ShoppingBag, ShoppingCart, Eye } from "lucide-react";
 import { type Product, formatPrice } from "../../data/products";
 import StarRating from "./StarRating";
 import { useShop } from "../../context/ShopContext";
+import QuickViewModal from "./QuickViewModal";
 
 interface ProductCardProps {
   product: Product;
@@ -11,6 +13,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, index = 0, isFavoritePage = false }: ProductCardProps) {
+  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const { addToCart, toggleFavorite, favorites } = useShop();
   const isFavorite = favorites.includes(product.id);
   
@@ -55,8 +58,14 @@ export default function ProductCard({ product, index = 0, isFavoritePage = false
 
         {/* Quick view overlay */}
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
-          <button className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition-transform hover:scale-105">
-            <Eye size={16} /> Quick View
+          <button 
+            onClick={(e) => {
+              e.preventDefault();
+              setIsQuickViewOpen(true);
+            }}
+            className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition-transform hover:scale-105"
+          >
+            <Eye size={16} /> Detail
           </button>
         </div>
 
@@ -117,6 +126,12 @@ export default function ProductCard({ product, index = 0, isFavoritePage = false
           </button>
         </div>
       </div>
+
+      <QuickViewModal 
+        product={product} 
+        isOpen={isQuickViewOpen} 
+        onClose={() => setIsQuickViewOpen(false)} 
+      />
     </motion.article>
   );
 }
