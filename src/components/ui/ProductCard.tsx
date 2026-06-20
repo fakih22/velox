@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
-import { Heart, ShoppingBag, Eye } from "lucide-react";
-import type { Product } from "../../data/products";
+import { Heart, ShoppingBag, ShoppingCart, Eye } from "lucide-react";
+import { type Product, formatPrice } from "../../data/products";
 import StarRating from "./StarRating";
 import { useShop } from "../../context/ShopContext";
 
 interface ProductCardProps {
   product: Product;
   index?: number;
+  isFavoritePage?: boolean;
 }
 
-export default function ProductCard({ product, index = 0 }: ProductCardProps) {
+export default function ProductCard({ product, index = 0, isFavoritePage = false }: ProductCardProps) {
   const { addToCart, toggleFavorite, favorites } = useShop();
   const isFavorite = favorites.includes(product.id);
   
@@ -92,21 +93,27 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           ))}
         </div>
 
-        <div className="mt-4 flex items-end justify-between">
-          <div className="flex items-baseline gap-2">
-            <span className="text-xl font-bold text-white">${product.price}</span>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-y-3 gap-x-2">
+          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+            <span className="text-lg font-bold text-white">{formatPrice(product.price)}</span>
             {product.oldPrice && (
-              <span className="text-sm text-white/35 line-through">${product.oldPrice}</span>
+              <span className="text-xs text-white/35 line-through">{formatPrice(product.oldPrice)}</span>
             )}
           </div>
           <button
             onClick={(e) => {
               e.preventDefault();
               addToCart(product.id);
+              if (isFavoritePage) {
+                toggleFavorite(product.id);
+              }
             }}
-            className="flex items-center gap-1.5 rounded-full bg-crimson px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 hover:bg-crimson-deep shadow-md"
+            className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 shadow-md ${
+              isFavoritePage ? "bg-white/10 hover:bg-crimson border border-white/20" : "bg-crimson hover:bg-crimson-deep"
+            }`}
           >
-            <ShoppingBag size={14} /> Add
+            {isFavoritePage ? <ShoppingCart size={14} /> : <ShoppingBag size={14} />} 
+            {isFavoritePage ? "Move to Cart" : "Add"}
           </button>
         </div>
       </div>

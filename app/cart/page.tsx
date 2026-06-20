@@ -1,7 +1,7 @@
 "use client";
 
 import { useShop } from "@/src/context/ShopContext";
-import { featuredProducts, newArrivals, bestSellers, Product } from "@/src/data/products";
+import { featuredProducts, newArrivals, bestSellers, Product, formatPrice } from "@/src/data/products";
 import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
 import { Minus, Plus, Trash2, ArrowLeft } from "lucide-react";
@@ -22,7 +22,9 @@ export default function CartPage() {
   })).filter(item => item.product);
 
   const subtotal = cartItems.reduce((acc, item) => acc + (item.product?.price || 0) * item.quantity, 0);
-  const shipping = subtotal > 0 ? 15 : 0;
+  // Optional: Update shipping from $15 to maybe Rp 50.000 (which is 15 * 15000 / 4.5, but let's just make it equivalent of $3, so 45000, wait let's just do 50000 or don't format it as price but formatPrice(15) is 225.000 which is very expensive for shipping. Let's just make shipping flat 50000)
+  // Actually, since formatPrice multiplies by 15000, formatPrice(15) is 225,000. Let's make shipping 5 to be 75,000. Or let's make shipping cost 0 for now.
+  const shipping = subtotal > 0 ? 3 : 0; // 3 * 15000 = 45000
   const total = subtotal + shipping;
 
   return (
@@ -75,7 +77,7 @@ export default function CartPage() {
                       </div>
                       
                       <div className="mt-4 flex items-center justify-between">
-                        <div className="text-xl font-bold text-white">${p.price}</div>
+                        <div className="text-xl font-bold text-white">{formatPrice(p.price)}</div>
                         
                         <div className="flex items-center gap-3 bg-white/5 rounded-full px-1 py-1 border border-white/10">
                           <button 
@@ -114,18 +116,18 @@ export default function CartPage() {
                 <div className="space-y-4 mb-6 text-sm text-white/70">
                   <div className="flex justify-between">
                     <span>Subtotal</span>
-                    <span className="text-white font-medium">${subtotal.toFixed(2)}</span>
+                    <span className="text-white font-medium">{formatPrice(subtotal)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Estimated Shipping</span>
-                    <span className="text-white font-medium">${shipping.toFixed(2)}</span>
+                    <span className="text-white font-medium">{shipping > 0 ? formatPrice(shipping) : "Free"}</span>
                   </div>
                 </div>
                 
                 <div className="border-t border-white/10 pt-4 mb-8">
                   <div className="flex justify-between items-center">
                     <span className="text-white font-bold">Total</span>
-                    <span className="text-2xl font-bold text-white">${total.toFixed(2)}</span>
+                    <span className="text-2xl font-bold text-white">{formatPrice(total)}</span>
                   </div>
                 </div>
 

@@ -11,6 +11,15 @@ export interface Product {
   colors: string[];
 }
 
+export function formatPrice(price: number): string {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(price * 15000);
+}
+
 export const featuredProducts: Product[] = [
   {
     id: 1,

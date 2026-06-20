@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Star } from "lucide-react";
-import { newArrivals } from "../data/products";
+import { newArrivals, formatPrice } from "../data/products";
 import StarRating from "./ui/StarRating";
 import SectionHeader from "./ui/SectionHeader";
 
@@ -74,8 +74,8 @@ export default function NewArrivals() {
                   <StarRating rating={p.rating} />
                 </div>
                 <h3 className="mt-2 text-xl font-semibold text-white">{p.name}</h3>
-                <div className="mt-4 flex items-center justify-between">
-                  <span className="text-lg font-bold text-white">${p.price}</span>
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-x-2 gap-y-3">
+                  <span className="text-lg font-bold text-white">{formatPrice(p.price)}</span>
                   <button className="rounded-full bg-white/10 px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 hover:bg-crimson">
                     Shop Now
                   </button>

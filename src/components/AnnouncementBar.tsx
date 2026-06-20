@@ -4,7 +4,7 @@ export default function AnnouncementBar() {
       <div className="flex animate-marquee whitespace-nowrap py-3 sm:py-4">
         {Array.from({ length: 2 }).map((_, i) => (
           <span key={i} className="mx-8">
-            Free express shipping on orders over $150 · Members get early access to drops · Step Into The Future
+            Free express shipping on orders over Rp 2.250.000 · Members get early access to drops · Step Into The Future
           </span>
         ))}
       </div>
