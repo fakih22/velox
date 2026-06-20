@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ShoppingBag, ShoppingCart, Heart } from "lucide-react";
+import { X, ShoppingBag, ShoppingCart, Heart, Check } from "lucide-react";
 import { Product, formatPrice } from "../../data/products";
 import StarRating from "./StarRating";
 import { useShop } from "../../context/ShopContext";
@@ -12,6 +12,7 @@ interface QuickViewModalProps {
 }
 
 export default function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps) {
+  const [isAdded, setIsAdded] = useState(false);
   const { addToCart, toggleFavorite, favorites } = useShop();
   const isFavorite = favorites.includes(product.id);
 
@@ -121,12 +122,23 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                 <button
                   onClick={() => {
                     addToCart(product.id);
-                    // Optional: close modal after adding to cart
-                    // onClose();
+                    setIsAdded(true);
+                    setTimeout(() => setIsAdded(false), 2000);
                   }}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-crimson px-8 py-4 font-bold text-white transition-all hover:scale-105 hover:bg-crimson-deep shadow-lg"
+                  disabled={isAdded}
+                  className={`flex flex-1 items-center justify-center gap-2 rounded-full px-8 py-4 font-bold text-white transition-all shadow-lg ${
+                    isAdded ? "bg-green-600" : "bg-crimson hover:bg-crimson-deep hover:scale-105"
+                  }`}
                 >
-                  <ShoppingCart size={18} /> Add to Cart
+                  {isAdded ? (
+                    <>
+                      <Check size={18} /> Added Successfully
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart size={18} /> Add to Cart
+                    </>
+                  )}
                 </button>
                 <button
                   onClick={() => toggleFavorite(product.id)}
@@ -140,6 +152,21 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                 </button>
               </div>
             </div>
+
+            {/* Toast Notification */}
+            <AnimatePresence>
+              {isAdded && (
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-black shadow-2xl z-50"
+                >
+                  <Check size={16} className="text-green-600" />
+                  Successfully added to cart
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       )}
