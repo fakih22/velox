@@ -22,10 +22,10 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       className="group relative flex flex-col overflow-hidden rounded-3xl glass"
     >
       {/* Image area */}
-      <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-white/[0.06] to-transparent">
+      <div className="relative aspect-square overflow-hidden bg-white/[0.03]">
         {/* Badge */}
         {product.badge && (
-          <span className="absolute left-4 top-4 z-20 rounded-full bg-crimson px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-crimson/30">
+          <span className="absolute left-4 top-4 z-20 rounded-full bg-crimson px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-md">
             {product.badge}
           </span>
         )}
@@ -87,7 +87,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               <span className="text-sm text-white/35 line-through">${product.oldPrice}</span>
             )}
           </div>
-          <button className="flex items-center gap-1.5 rounded-full bg-crimson px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 hover:bg-crimson-deep hover:shadow-lg hover:shadow-crimson/40">
+          <button className="flex items-center gap-1.5 rounded-full bg-crimson px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 hover:bg-crimson-deep shadow-md">
             <ShoppingBag size={14} /> Add
           </button>
         </div>

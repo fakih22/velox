@@ -12,7 +12,6 @@ export default function MobileApp() {
     <section id="about" className="relative py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] glass-strong p-8 sm:p-12 lg:p-16">
-          <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-crimson/20 blur-[100px]" />
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             {/* Text */}
             <div>
@@ -68,7 +67,6 @@ export default function MobileApp() {
 
             {/* Mockup */}
             <div className="relative flex items-center justify-center">
-              <div className="absolute h-72 w-72 animate-pulse-glow rounded-full bg-crimson/30 blur-[80px]" />
               <motion.img
                 src="/images/app-mockup.png"
                 alt="VELOX mobile app"

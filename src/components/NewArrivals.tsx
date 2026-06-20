@@ -53,9 +53,9 @@ export default function NewArrivals() {
               transition={{ delay: i * 0.08 }}
               className="group relative w-[300px] flex-none snap-start overflow-hidden rounded-3xl glass sm:w-[360px]"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-white/[0.06] to-transparent">
+              <div className="relative aspect-[4/3] overflow-hidden bg-white/[0.03]">
                 {p.badge && (
-                  <span className="absolute left-4 top-4 z-20 flex items-center gap-1 rounded-full bg-crimson px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg shadow-crimson/30">
+                  <span className="absolute left-4 top-4 z-20 flex items-center gap-1 rounded-full bg-crimson px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-md">
                     <Star size={11} className="fill-white" /> {p.badge}
                   </span>
                 )}

@@ -12,19 +12,7 @@ export default function Hero() {
   return (
     <section id="home" ref={ref} className="relative min-h-screen overflow-hidden bg-ink">
       {/* Background layers */}
-      <div className="absolute inset-0 grid-bg opacity-40" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_70%_40%,rgba(239,43,43,0.25),transparent_70%)]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink" />
-      <motion.div
-        className="absolute -left-40 top-1/3 h-96 w-96 rounded-full bg-crimson/20 blur-[120px]"
-        animate={{ x: [0, 60, 0], y: [0, -30, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute -right-32 bottom-10 h-80 w-80 rounded-full bg-crimson-deep/30 blur-[120px]"
-        animate={{ x: [0, -50, 0], y: [0, 40, 0] }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <div className="absolute inset-0 bg-ink" />
 
       <div className="relative mx-auto grid min-h-screen max-w-7xl grid-cols-1 items-center gap-8 px-5 pb-16 pt-10 sm:px-8 lg:grid-cols-2 lg:pt-0">
         {/* Text column */}
@@ -105,15 +93,13 @@ export default function Hero() {
           style={{ y: yImg }}
           className="relative order-1 flex items-center justify-center lg:order-2"
         >
-          <div className="absolute h-[420px] w-[420px] animate-spin-slow rounded-full border border-crimson/20 sm:h-[520px] sm:w-[520px]" />
-          <div className="absolute h-[300px] w-[300px] animate-pulse-glow rounded-full bg-crimson/30 blur-[80px] sm:h-[380px] sm:w-[380px]" />
           <motion.img
             src="/images/hero-sneaker-3d.png"
             alt="VELOX futuristic sneaker"
             initial={{ opacity: 0, scale: 0.85, rotate: -8 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="animate-float relative z-10 w-[78%] max-w-md drop-shadow-[0_25px_60px_rgba(239,43,43,0.35)] sm:w-[70%]"
+            className="animate-float relative z-10 w-[78%] max-w-md drop-shadow-[0_20px_30px_rgba(0,0,0,0.6)] sm:w-[70%]"
           />
         </motion.div>
       </div>

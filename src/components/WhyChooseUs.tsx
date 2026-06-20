@@ -14,7 +14,6 @@ const features = [
 export default function WhyChooseUs() {
   return (
     <section id="about" className="relative py-24 sm:py-28">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,rgba(239,43,43,0.08),transparent)]" />
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeader
           eyebrow="Why Choose Us"
@@ -31,11 +30,10 @@ export default function WhyChooseUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: (i % 3) * 0.08 }}
-              className="group relative overflow-hidden rounded-3xl glass p-7 transition-all hover:border-crimson/30 hover:bg-white/[0.06]"
+              className="group relative overflow-hidden rounded-3xl glass p-7 transition-all hover:border-white/20 hover:bg-white/[0.02]"
             >
-              <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-crimson/0 blur-2xl transition-all duration-500 group-hover:bg-crimson/20" />
               <div className="relative">
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-crimson to-crimson-deep text-white shadow-lg shadow-crimson/30">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-crimson text-white">
                   <f.icon size={26} />
                 </div>
                 <h3 className="mt-5 text-lg font-semibold text-white">{f.title}</h3>

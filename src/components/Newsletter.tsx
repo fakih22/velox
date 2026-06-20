@@ -17,11 +17,7 @@ export default function Newsletter() {
   return (
     <section className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-5xl px-5 sm:px-8">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-crimson via-crimson-deep to-[#5a0707] p-8 text-center sm:p-14">
-          <div className="absolute inset-0 grid-bg opacity-20" />
-          <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
-          <div className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
-
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-ink-soft border border-white/10 p-8 text-center sm:p-14">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}

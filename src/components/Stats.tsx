@@ -41,7 +41,6 @@ export default function Stats() {
     <section className="relative py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] glass-strong px-6 py-12 sm:px-12">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_50%,rgba(239,43,43,0.12),transparent)]" />
           <div className="relative grid grid-cols-2 gap-8 lg:grid-cols-4">
             {stats.map((s) => (
               <div key={s.label} className="text-center">
