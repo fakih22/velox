@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0a0a0a"/>
+  <path d="M10 40 Q20 26 32 28 Q44 30 54 20 L54 24 Q44 36 30 34 Q18 32 10 44 Z" fill="#ef2b2b"/>
+  <text x="32" y="54" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#fff" text-anchor="middle" letter-spacing="1">VELOX</text>
+</svg>
