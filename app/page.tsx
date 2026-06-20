@@ -2,6 +2,7 @@
 
 import Navbar from "../src/components/Navbar";
 import Hero from "../src/components/Hero";
+import AnnouncementBar from "../src/components/AnnouncementBar";
 import FeaturedCollection from "../src/components/FeaturedCollection";
 import NewArrivals from "../src/components/NewArrivals";
 import ShopByCategory from "../src/components/ShopByCategory";
@@ -19,6 +20,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <AnnouncementBar />
         <FeaturedCollection />
         <NewArrivals />
         <ShopByCategory />

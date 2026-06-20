@@ -17,17 +17,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top announcement bar */}
-      <div className="relative z-50 overflow-hidden bg-crimson text-center text-[11px] font-semibold uppercase tracking-wider text-white">
-        <div className="flex animate-marquee whitespace-nowrap py-2">
-          {Array.from({ length: 2 }).map((_, i) => (
-            <span key={i} className="mx-8">
-              Free express shipping on orders over $150 · Members get early access to drops · Step Into The Future
-            </span>
-          ))}
-        </div>
-      </div>
-
       <motion.header
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
