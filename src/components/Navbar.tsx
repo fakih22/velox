@@ -115,9 +115,6 @@ export default function Navbar() {
             <button className="flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white">
               <Search size={19} />
             </button>
-            <button className="hidden h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white sm:flex">
-              <User size={19} />
-            </button>
             <Link href="/favorites" className="relative flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white">
               <Heart size={19} />
               {favoritesCount > 0 && (
@@ -134,6 +131,14 @@ export default function Navbar() {
                 </span>
               )}
             </Link>
+            
+            <a 
+              href="#products" 
+              className="hidden sm:flex ml-2 items-center justify-center rounded-full bg-crimson px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-crimson-deep hover:scale-105 shadow-[0_0_15px_rgba(220,38,38,0.3)]"
+            >
+              Shop Now
+            </a>
+
             <button
               onClick={() => setOpen(true)}
               className="flex h-10 w-10 items-center justify-center rounded-full text-white hover:bg-white/10 lg:hidden"
@@ -189,8 +194,14 @@ export default function Navbar() {
                   </motion.li>
                 ))}
               </ul>
-              <div className="mt-auto flex items-center gap-3 border-t border-white/10 pt-6 text-white/60">
-                <User size={18} /> <span className="text-sm">My Account</span>
+              <div className="mt-auto flex items-center justify-center border-t border-white/10 pt-6">
+                <a 
+                  href="#products" 
+                  onClick={() => setOpen(false)}
+                  className="w-full text-center rounded-full bg-crimson px-5 py-3.5 text-sm font-semibold text-white transition-all hover:bg-crimson-deep shadow-[0_0_15px_rgba(220,38,38,0.3)]"
+                >
+                  Shop Now
+                </a>
               </div>
             </motion.div>
           </motion.div>
