@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, ShoppingCart, User, Menu, X, ChevronDown, Heart } from "lucide-react";
 import Link from "next/link";
 import { useShop } from "../context/ShopContext";
+import { featuredProducts, newArrivals, bestSellers, type Product, formatPrice } from "../data/products";
+import QuickViewModal from "./ui/QuickViewModal";
 
 const links = ["Home", "Collection", "New Arrivals", "Sale", "About", "Contact"];
 
@@ -17,6 +19,17 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const { cartCount, favoritesCount } = useShop();
+
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+  const allProducts = [...featuredProducts, ...newArrivals, ...bestSellers];
+  const uniqueProducts = Array.from(new Map(allProducts.map((p) => [p.name, p])).values());
+
+  const searchResults = searchQuery.trim() === "" 
+    ? [] 
+    : uniqueProducts.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   useEffect(() => {
     const onScroll = () => {
@@ -112,7 +125,13 @@ export default function Navbar() {
 
           {/* Icons */}
           <div className="flex items-center gap-1 sm:gap-2">
-            <button className="flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white">
+            <button 
+              onClick={() => {
+                setIsSearchOpen(!isSearchOpen);
+                if (!isSearchOpen) setSearchQuery("");
+              }}
+              className={`flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-white/10 hover:text-white ${isSearchOpen ? "bg-white/10 text-white" : "text-white/80"}`}
+            >
               <Search size={19} />
             </button>
             <Link href="/favorites" className="relative flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white">
@@ -147,6 +166,71 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
+
+        {/* Search Overlay */}
+        <AnimatePresence>
+          {isSearchOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute left-0 top-full w-full border-t border-white/10 glass-strong p-5 shadow-2xl"
+            >
+              <div className="mx-auto max-w-3xl">
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50" size={20} />
+                  <input
+                    type="text"
+                    placeholder="Search for sneakers..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    autoFocus
+                    className="w-full rounded-full border border-white/10 bg-white/5 py-4 pl-12 pr-12 text-white placeholder:text-white/30 transition-all focus:border-crimson focus:outline-none focus:ring-1 focus:ring-crimson"
+                  />
+                  <button 
+                    onClick={() => { setIsSearchOpen(false); setSearchQuery(""); }}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+
+                {searchQuery && (
+                  <div className="mt-6 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                    {searchResults.length > 0 ? (
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        {searchResults.map((product) => (
+                          <div 
+                            key={product.id}
+                            onClick={() => {
+                              setSelectedProduct(product);
+                              setIsSearchOpen(false);
+                              setSearchQuery("");
+                            }}
+                            className="flex cursor-pointer items-center gap-4 rounded-2xl p-3 transition-colors hover:bg-white/5"
+                          >
+                            <div className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-white/5">
+                              <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+                            </div>
+                            <div>
+                              <h4 className="text-sm font-semibold text-white">{product.name}</h4>
+                              <p className="mt-1 text-xs font-bold text-crimson">{formatPrice(product.price)}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="py-10 text-center text-white/50">
+                        No products found matching "{searchQuery}"
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.header>
 
       {/* Mobile menu */}
@@ -207,6 +291,15 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Quick View Modal for Search Results */}
+      {selectedProduct && (
+        <QuickViewModal
+          product={selectedProduct}
+          isOpen={!!selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
     </>
   );
 }
