@@ -306,23 +306,23 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     name: "Marcus Chen",
-    role: "Marathon Runner",
+    role: "Pelari Maraton",
     avatar: "/images/avatar-1.jpg",
     rating: 5,
-    text: "The Aero Pulse Pro completely transformed my training. The air cushion technology feels like running on clouds. Best investment I've made for my performance.",
+    text: "Aero Pulse Pro benar-benar mengubah cara saya berlatih. Teknologi bantalan udaranya membuat saya merasa seperti berlari di atas awan. Investasi terbaik untuk performa saya.",
   },
   {
     name: "Sofia Almeida",
-    role: "Fashion Stylist",
+    role: "Penata Gaya",
     avatar: "/images/avatar-2.jpg",
     rating: 5,
-    text: "VELOX nailed the balance between performance and style. The Cloud Stride pairs with everything in my wardrobe. Quality is genuinely luxury tier.",
+    text: "VELOX berhasil memadukan keseimbangan antara performa dan gaya. Cloud Stride cocok dengan semua pakaian di lemari saya. Kualitasnya benar-benar terasa mewah.",
   },
   {
     name: "Derek Osei",
-    role: "Pro Basketball Player",
+    role: "Pemain Basket Profesional",
     avatar: "/images/avatar-3.jpg",
     rating: 5,
-    text: "Court Dominator gives me the grip and support I need on the court. Lightweight but rock solid. These are now my go-to game shoes.",
+    text: "Court Dominator memberikan cengkeraman dan dukungan yang saya butuhkan di lapangan. Sangat ringan tapi luar biasa kokoh. Ini sekarang jadi sepatu andalan saya untuk bertanding.",
   },
 ];
