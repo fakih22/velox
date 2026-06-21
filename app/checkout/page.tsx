@@ -78,7 +78,7 @@ function CheckoutContent() {
 
     // Ganti dengan nomor WhatsApp Anda (Gunakan format internasional tanpa tanda '+')
     // Contoh: "6281234567890"
-    const WHATSAPP_NUMBER = "6281234567890"; 
+    const WHATSAPP_NUMBER = "6282336618275"; 
 
     let itemsText = cartItems.map(item => 
       `- ${item.quantity}x ${item.product!.name} (${formatPrice((item.product?.price || 0) * item.quantity)})`
@@ -149,7 +149,7 @@ function CheckoutContent() {
                   required
                   value={formData.name}
                   onChange={handleInputChange}
-                  placeholder="John Doe"
+                  placeholder="Name"
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-crimson/50 focus:ring-1 focus:ring-crimson/50 transition-all"
                 />
               </div>
