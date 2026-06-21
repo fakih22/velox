@@ -57,16 +57,16 @@ export default function ProductCard({ product, index = 0, isFavoritePage = false
         </button>
 
         {/* Quick view overlay */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
-          <button 
-            onClick={(e) => {
-              e.preventDefault();
-              setIsQuickViewOpen(true);
-            }}
-            className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition-transform hover:scale-105"
-          >
+        <div 
+          onClick={(e) => {
+            e.preventDefault();
+            setIsQuickViewOpen(true);
+          }}
+          className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 cursor-pointer"
+        >
+          <div className="flex items-center gap-1 sm:gap-2 rounded-full bg-white px-3 sm:px-5 py-1.5 sm:py-2.5 text-xs sm:text-sm font-semibold text-black transition-transform group-hover:scale-105">
             <Eye size={16} /> Detail
-          </button>
+          </div>
         </div>
 
         <img

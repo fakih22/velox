@@ -88,47 +88,47 @@ export default function CartPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className={`flex flex-col sm:flex-row gap-5 p-5 glass rounded-2xl items-start sm:items-center relative transition-all ${
+                    className={`flex flex-row gap-3 sm:gap-5 p-3 sm:p-5 glass rounded-2xl items-center relative transition-all ${
                       selectedItems.includes(p.id) ? "border border-crimson/50 shadow-[0_0_15px_rgba(220,38,38,0.1)]" : "opacity-80 border border-transparent"
                     }`}
                   >
                     <button 
                       onClick={() => toggleSelection(p.id)}
-                      className="sm:mr-2 flex items-center justify-center shrink-0 transition-all hover:scale-110"
+                      className="flex items-center justify-center shrink-0 transition-all hover:scale-110"
                     >
                       {selectedItems.includes(p.id) ? (
-                        <CheckSquare size={24} className="text-crimson" />
+                        <CheckSquare size={20} className="sm:w-6 sm:h-6 text-crimson" />
                       ) : (
-                        <Square size={24} className="text-white/40 hover:text-white/70" />
+                        <Square size={20} className="sm:w-6 sm:h-6 text-white/40 hover:text-white/70" />
                       )}
                     </button>
 
-                    <div className="h-24 w-24 rounded-xl bg-white/[0.03] overflow-hidden flex-none shrink-0 cursor-pointer" onClick={() => toggleSelection(p.id)}>
+                    <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-xl bg-white/[0.03] overflow-hidden flex-none shrink-0 cursor-pointer" onClick={() => toggleSelection(p.id)}>
                       <img src={p.image} alt={p.name} className="h-full w-full object-cover" />
                     </div>
                     
-                    <div className="flex-1 flex flex-col justify-between h-full min-w-0">
-                      <div>
-                        <div className="text-[10px] uppercase tracking-wider text-crimson font-semibold mb-1">{p.category}</div>
-                        <h3 className="text-lg font-bold text-white truncate">{p.name}</h3>
+                    <div className="flex-1 flex flex-col justify-between min-w-0">
+                      <div className="pr-6">
+                        <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-crimson font-semibold mb-0.5 sm:mb-1">{p.category}</div>
+                        <h3 className="text-sm sm:text-lg font-bold text-white truncate">{p.name}</h3>
                       </div>
                       
-                      <div className="mt-4 flex items-center justify-between">
-                        <div className="text-xl font-bold text-white">{formatPrice(p.price)}</div>
+                      <div className="mt-2 sm:mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0">
+                        <div className="text-sm sm:text-xl font-bold text-white">{formatPrice(p.price)}</div>
                         
-                        <div className="flex items-center gap-3 bg-white/5 rounded-full px-1 py-1 border border-white/10">
+                        <div className="flex items-center gap-1 sm:gap-3 bg-white/5 rounded-full px-1 py-1 border border-white/10 w-fit">
                           <button 
                             onClick={() => updateCartQuantity(p.id, item.quantity - 1)}
-                            className="h-7 w-7 rounded-full flex items-center justify-center hover:bg-white/10 text-white transition-colors"
+                            className="h-6 w-6 sm:h-7 sm:w-7 rounded-full flex items-center justify-center hover:bg-white/10 text-white transition-colors"
                           >
-                            <Minus size={14} />
+                            <Minus size={12} className="sm:w-3.5 sm:h-3.5" />
                           </button>
-                          <span className="text-sm font-semibold text-white w-4 text-center">{item.quantity}</span>
+                          <span className="text-xs sm:text-sm font-semibold text-white w-4 text-center">{item.quantity}</span>
                           <button 
                             onClick={() => updateCartQuantity(p.id, item.quantity + 1)}
-                            className="h-7 w-7 rounded-full flex items-center justify-center hover:bg-white/10 text-white transition-colors"
+                            className="h-6 w-6 sm:h-7 sm:w-7 rounded-full flex items-center justify-center hover:bg-white/10 text-white transition-colors"
                           >
-                            <Plus size={14} />
+                            <Plus size={12} className="sm:w-3.5 sm:h-3.5" />
                           </button>
                         </div>
                       </div>
@@ -136,9 +136,9 @@ export default function CartPage() {
 
                     <button 
                       onClick={() => removeFromCart(p.id)}
-                      className="absolute top-5 right-5 h-8 w-8 rounded-full flex items-center justify-center text-white/40 hover:text-crimson hover:bg-crimson/10 transition-colors"
+                      className="absolute top-2 right-2 sm:top-5 sm:right-5 h-8 w-8 rounded-full flex items-center justify-center text-white/40 hover:text-crimson hover:bg-crimson/10 transition-colors"
                     >
-                      <Trash2 size={16} />
+                      <Trash2 size={16} className="sm:w-5 sm:h-5" />
                     </button>
                   </motion.div>
                 );

@@ -60,7 +60,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
             </button>
 
             {/* Image Section */}
-            <div className="relative w-full md:w-1/2 bg-white/[0.02] aspect-square md:aspect-auto md:min-h-[400px]">
+            <div className="relative w-full md:w-1/2 bg-white/[0.02] h-48 sm:h-72 md:h-auto md:min-h-[400px]">
               {product.badge && (
                 <span className="absolute left-6 top-6 z-10 rounded-full bg-crimson px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-md">
                   {product.badge}
@@ -74,28 +74,28 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
             </div>
 
             {/* Details Section */}
-            <div className="flex w-full flex-col p-6 md:w-1/2 md:p-10 overflow-y-auto custom-scrollbar">
-              <div className="mb-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-crimson">
+            <div className="flex w-full flex-col p-4 sm:p-6 md:w-1/2 md:p-10 overflow-y-auto custom-scrollbar">
+              <div className="mb-1 sm:mb-2">
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-crimson">
                   {product.category}
                 </span>
               </div>
               
-              <h2 className="mb-4 text-3xl font-extrabold text-white">{product.name}</h2>
+              <h2 className="mb-2 sm:mb-4 text-xl sm:text-3xl font-extrabold text-white">{product.name}</h2>
               
-              <div className="mb-6 flex items-center gap-2">
+              <div className="mb-3 sm:mb-6 flex items-center gap-2">
                 <StarRating rating={product.rating} />
-                <span className="text-sm text-white/50">({product.reviews} reviews)</span>
+                <span className="text-xs sm:text-sm text-white/50">({product.reviews} reviews)</span>
               </div>
 
-              <div className="mb-6 flex items-baseline gap-3">
-                <span className="text-3xl font-bold text-white">{formatPrice(product.price)}</span>
+              <div className="mb-4 sm:mb-6 flex items-baseline gap-2 sm:gap-3">
+                <span className="text-2xl sm:text-3xl font-bold text-white">{formatPrice(product.price)}</span>
                 {product.oldPrice && (
-                  <span className="text-lg text-white/40 line-through">{formatPrice(product.oldPrice)}</span>
+                  <span className="text-sm sm:text-lg text-white/40 line-through">{formatPrice(product.oldPrice)}</span>
                 )}
               </div>
 
-              <div className="mb-8 text-white/70 leading-relaxed">
+              <div className="mb-4 sm:mb-8 text-xs sm:text-base text-white/70 leading-relaxed line-clamp-3 sm:line-clamp-none">
                 <p>
                   Experience the perfect blend of style and performance with the {product.name}. 
                   Designed for the modern athlete and streetwear enthusiast alike, this premium 
@@ -118,7 +118,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                 </div>
               </div>
 
-              <div className="mt-auto flex items-center gap-4">
+              <div className="mt-auto flex items-center gap-3 sm:gap-4">
                 <button
                   onClick={() => {
                     addToCart(product.id);
@@ -126,23 +126,23 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                     setTimeout(() => setIsAdded(false), 2000);
                   }}
                   disabled={isAdded}
-                  className={`flex flex-1 items-center justify-center gap-2 rounded-full px-8 py-4 font-bold text-white transition-all shadow-lg ${
+                  className={`flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold text-white transition-all shadow-lg ${
                     isAdded ? "bg-green-600" : "bg-crimson hover:bg-crimson-deep hover:scale-105"
                   }`}
                 >
                   {isAdded ? (
                     <>
-                      <Check size={18} /> Added Successfully
+                      <Check size={16} className="sm:w-[18px] sm:h-[18px]" /> Added Successfully
                     </>
                   ) : (
                     <>
-                      <ShoppingCart size={18} /> Add to Cart
+                      <ShoppingCart size={16} className="sm:w-[18px] sm:h-[18px]" /> Add to Cart
                     </>
                   )}
                 </button>
                 <button
                   onClick={() => toggleFavorite(product.id)}
-                  className={`flex h-14 w-14 items-center justify-center rounded-full border-2 transition-all hover:scale-105 ${
+                  className={`flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-full border-2 transition-all hover:scale-105 ${
                     isFavorite 
                       ? "border-crimson text-crimson bg-crimson/10" 
                       : "border-white/10 text-white/70 hover:border-white/30 hover:text-white"
