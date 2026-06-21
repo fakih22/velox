@@ -37,8 +37,8 @@ export default function ProductCard({ product, index = 0, isFavoritePage = false
             {product.badge}
           </span>
         )}
-        {discount > 0 && (
-          <span className="absolute right-4 top-4 z-20 rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur">
+        {discount > 0 && !product.badge?.includes("-") && (
+          <span className="absolute left-2 top-10 sm:left-4 sm:top-12 z-20 rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-bold text-white backdrop-blur">
             -{discount}%
           </span>
         )}
@@ -49,11 +49,11 @@ export default function ProductCard({ product, index = 0, isFavoritePage = false
             e.preventDefault();
             toggleFavorite(product.id);
           }}
-          className={`absolute bottom-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full glass-strong transition-all hover:scale-110 ${
+          className={`absolute top-2 right-2 sm:top-auto sm:bottom-4 sm:right-4 z-20 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full glass-strong transition-all hover:scale-110 ${
             isFavorite ? "text-crimson" : "text-white/70 hover:text-crimson"
           }`}
         >
-          <Heart size={17} className={isFavorite ? "fill-crimson" : ""} />
+          <Heart size={16} className={`sm:w-[17px] sm:h-[17px] ${isFavorite ? "fill-crimson" : ""}`} />
         </button>
 
         {/* Quick view overlay */}
@@ -78,18 +78,18 @@ export default function ProductCard({ product, index = 0, isFavoritePage = false
       </div>
 
       {/* Body */}
-      <div className="flex flex-1 flex-col p-5">
-        <div className="flex items-center justify-between">
-          <span className="text-[11px] font-medium uppercase tracking-wider text-crimson">
+      <div className="flex flex-1 flex-col p-3 sm:p-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-0">
+          <span className="text-[9px] sm:text-[11px] font-medium uppercase tracking-wider text-crimson line-clamp-1">
             {product.category}
           </span>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1 sm:gap-1.5">
             <StarRating rating={product.rating} />
-            <span className="text-xs text-white/40">({product.reviews})</span>
+            <span className="text-[10px] sm:text-xs text-white/40">({product.reviews})</span>
           </div>
         </div>
 
-        <h3 className="mt-2 text-lg font-semibold text-white">{product.name}</h3>
+        <h3 className="mt-1.5 sm:mt-2 text-sm sm:text-lg font-semibold text-white line-clamp-1">{product.name}</h3>
 
         {/* Colors */}
         <div className="mt-3 flex items-center gap-1.5">
@@ -102,11 +102,11 @@ export default function ProductCard({ product, index = 0, isFavoritePage = false
           ))}
         </div>
 
-        <div className="mt-4 flex items-end justify-between gap-2">
-          <div className="flex flex-col gap-0.5">
-            <span className="text-base sm:text-lg font-bold text-white leading-none">{formatPrice(product.price)}</span>
+        <div className="mt-auto pt-3 sm:pt-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+          <div className="flex flex-col justify-end gap-0.5 min-h-[32px] sm:min-h-[40px]">
+            <span className="text-sm sm:text-lg font-bold text-white leading-none">{formatPrice(product.price)}</span>
             {product.oldPrice && (
-              <span className="text-[10px] sm:text-xs text-white/40 line-through leading-none">{formatPrice(product.oldPrice)}</span>
+              <span className="text-[9px] sm:text-xs text-white/40 line-through leading-none">{formatPrice(product.oldPrice)}</span>
             )}
           </div>
           <button
@@ -117,12 +117,12 @@ export default function ProductCard({ product, index = 0, isFavoritePage = false
                 toggleFavorite(product.id);
               }
             }}
-            className={`flex-shrink-0 flex items-center gap-1.5 rounded-full px-3 sm:px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 shadow-md ${
+            className={`flex-shrink-0 flex items-center justify-center gap-1 sm:gap-1.5 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-[10px] sm:text-xs font-semibold text-white transition-all hover:scale-105 shadow-md w-full sm:w-auto ${
               isFavoritePage ? "bg-white/10 hover:bg-crimson border border-white/20" : "bg-crimson hover:bg-crimson-deep"
             }`}
           >
-            <ShoppingCart size={14} /> 
-            {isFavoritePage ? "Move to Cart" : "Add"}
+            <ShoppingCart size={12} className="sm:w-[14px] sm:h-[14px]" /> 
+            <span className="sm:inline">{isFavoritePage ? "Move to Cart" : "Add"}</span>
           </button>
         </div>
       </div>
