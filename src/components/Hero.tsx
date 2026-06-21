@@ -56,14 +56,14 @@ export default function Hero() {
             className="mt-9 flex flex-wrap items-center gap-4"
           >
             <a
-              href="#collection"
-              className="group flex items-center gap-2 rounded-full bg-crimson px-7 py-3.5 text-sm font-semibold text-white transition-all hover:scale-105 hover:bg-crimson-deep hover:shadow-xl hover:shadow-crimson/40"
+              href="#products"
+              className="group flex items-center gap-2 rounded-full bg-crimson px-7 py-3.5 text-sm font-semibold text-white transition-all hover:scale-105 hover:bg-crimson-deep shadow-[0_0_15px_rgba(220,38,38,0.2)] hover:shadow-[0_0_25px_rgba(220,38,38,0.4)]"
             >
               Shop Now
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </a>
             <a
-              href="#new-arrivals"
+              href="#collection"
               className="rounded-full border border-white/20 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition-all hover:scale-105 hover:border-white/40 hover:bg-white/5"
             >
               Explore Collection
