@@ -1,12 +1,14 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useShop } from "@/src/context/ShopContext";
 import { featuredProducts, newArrivals, bestSellers, Product, formatPrice } from "@/src/data/products";
 import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
-import { Minus, Plus, Trash2, ArrowLeft } from "lucide-react";
+import { Minus, Plus, Trash2, ArrowLeft, CheckSquare, Square } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 // Combine all products to look up details
 const allProducts = [...featuredProducts, ...newArrivals, ...bestSellers];
@@ -15,17 +17,39 @@ allProducts.forEach(p => productsMap.set(p.id, p));
 
 export default function CartPage() {
   const { cart, removeFromCart, updateCartQuantity } = useShop();
+  const router = useRouter();
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    if (cart.length > 0 && !isInitialized) {
+      setSelectedItems(cart.map(item => item.productId));
+      setIsInitialized(true);
+    }
+  }, [cart, isInitialized]);
 
   const cartItems = cart.map(item => ({
     ...item,
     product: productsMap.get(item.productId),
   })).filter(item => item.product);
 
-  const subtotal = cartItems.reduce((acc, item) => acc + (item.product?.price || 0) * item.quantity, 0);
-  // Optional: Update shipping from $15 to maybe Rp 50.000 (which is 15 * 15000 / 4.5, but let's just make it equivalent of $3, so 45000, wait let's just do 50000 or don't format it as price but formatPrice(15) is 225.000 which is very expensive for shipping. Let's just make shipping flat 50000)
-  // Actually, since formatPrice multiplies by 15000, formatPrice(15) is 225,000. Let's make shipping 5 to be 75,000. Or let's make shipping cost 0 for now.
+  const toggleSelection = (productId: number) => {
+    setSelectedItems(prev => 
+      prev.includes(productId) 
+        ? prev.filter(id => id !== productId)
+        : [...prev, productId]
+    );
+  };
+
+  const selectedCartItems = cartItems.filter(item => selectedItems.includes(item.product!.id));
+  const subtotal = selectedCartItems.reduce((acc, item) => acc + (item.product?.price || 0) * item.quantity, 0);
   const shipping = subtotal > 0 ? 3 : 0; // 3 * 15000 = 45000
   const total = subtotal + shipping;
+
+  const handleCheckout = () => {
+    if (selectedItems.length === 0) return;
+    router.push(`/checkout?items=${selectedItems.join(",")}`);
+  };
 
   return (
     <div className="bg-ink min-h-screen flex flex-col">
@@ -64,9 +88,22 @@ export default function CartPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className="flex flex-col sm:flex-row gap-5 p-5 glass rounded-2xl items-start sm:items-center relative"
+                    className={`flex flex-col sm:flex-row gap-5 p-5 glass rounded-2xl items-start sm:items-center relative transition-all ${
+                      selectedItems.includes(p.id) ? "border border-crimson/50 shadow-[0_0_15px_rgba(220,38,38,0.1)]" : "opacity-80 border border-transparent"
+                    }`}
                   >
-                    <div className="h-24 w-24 rounded-xl bg-white/[0.03] overflow-hidden flex-none shrink-0">
+                    <button 
+                      onClick={() => toggleSelection(p.id)}
+                      className="sm:mr-2 flex items-center justify-center shrink-0 transition-all hover:scale-110"
+                    >
+                      {selectedItems.includes(p.id) ? (
+                        <CheckSquare size={24} className="text-crimson" />
+                      ) : (
+                        <Square size={24} className="text-white/40 hover:text-white/70" />
+                      )}
+                    </button>
+
+                    <div className="h-24 w-24 rounded-xl bg-white/[0.03] overflow-hidden flex-none shrink-0 cursor-pointer" onClick={() => toggleSelection(p.id)}>
                       <img src={p.image} alt={p.name} className="h-full w-full object-cover" />
                     </div>
                     
@@ -131,8 +168,16 @@ export default function CartPage() {
                   </div>
                 </div>
 
-                <button className="w-full py-4 rounded-full bg-crimson hover:bg-crimson-deep text-white font-semibold transition-all hover:scale-[1.02] shadow-md flex items-center justify-center gap-2">
-                  Proceed to Checkout
+                <button 
+                  onClick={handleCheckout}
+                  disabled={selectedItems.length === 0}
+                  className={`w-full py-4 rounded-full font-semibold transition-all shadow-md flex items-center justify-center gap-2 ${
+                    selectedItems.length === 0 
+                      ? "bg-white/10 text-white/40 cursor-not-allowed"
+                      : "bg-crimson hover:bg-crimson-deep text-white hover:scale-[1.02]"
+                  }`}
+                >
+                  Proceed to Checkout ({selectedItems.length})
                 </button>
               </div>
             </div>

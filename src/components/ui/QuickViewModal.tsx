@@ -153,20 +153,6 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
               </div>
             </div>
 
-            {/* Toast Notification */}
-            <AnimatePresence>
-              {isAdded && (
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-black shadow-2xl z-50"
-                >
-                  <Check size={16} className="text-green-600" />
-                  Successfully added to cart
-                </motion.div>
-              )}
-            </AnimatePresence>
           </motion.div>
         </div>
       )}
