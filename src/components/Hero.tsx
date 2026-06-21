@@ -1,6 +1,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronDown, Flame } from "lucide-react";
 import { useRef } from "react";
+import { Syne } from "next/font/google";
+
+const syne = Syne({ subsets: ["latin"], weight: ["800"] });
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -23,18 +26,18 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-xs font-medium text-white/80"
           >
-            <Sparkles size={14} className="text-crimson" />
-            New Drop · Fall/Winter Collection 2025
+            <Flame size={14} className="text-crimson" />
+            Limited Edition · Apex Series
           </motion.span>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="mt-6 text-5xl font-extrabold leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl"
+            className={`mt-6 text-5xl font-black leading-[0.9] tracking-tighter text-white sm:text-6xl lg:text-7xl xl:text-[5.5rem] uppercase ${syne.className}`}
           >
-            Step Into <br />
-            <span className="text-gradient-red">The Future</span>
+           Elevate Every <br />
+            <span className="text-gradient-red">Step</span>
           </motion.h1>
 
           <motion.p
@@ -43,8 +46,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mt-6 max-w-md text-base leading-relaxed text-white/60 sm:text-lg"
           >
-            Engineered with air cushion technology and aerospace-grade materials. VELOX sneakers
-            redefine performance, comfort, and style for the next generation of athletes.
+            Experience the ultimate fusion of raw power and premium aesthetics. VELOX is meticulously crafted to shatter expectations and elevate your performance.
           </motion.p>
 
           <motion.div
