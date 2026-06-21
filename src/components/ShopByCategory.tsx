@@ -5,7 +5,7 @@ import SectionHeader from "./ui/SectionHeader";
 
 export default function ShopByCategory() {
   return (
-    <section id="collection" className="relative py-24 sm:py-28">
+    <section id="categories" className="relative py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeader
           eyebrow="Shop By Category"

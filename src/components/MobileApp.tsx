@@ -9,7 +9,7 @@ const appFeatures = [
 
 export default function MobileApp() {
   return (
-    <section id="about" className="relative py-24 sm:py-28">
+    <section id="mobile" className="relative py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] glass-strong p-8 sm:p-12 lg:p-16">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">

@@ -8,10 +8,10 @@ import { useShop } from "../context/ShopContext";
 import { featuredProducts, newArrivals, bestSellers, type Product, formatPrice } from "../data/products";
 import QuickViewModal from "./ui/QuickViewModal";
 
-const links = ["Home", "Collection", "New Arrivals", "Sale", "About", "Contact"];
+const links = ["Home", "Category", "Products", "About", "Contact"];
 
 const dropdownMenus: Record<string, string[]> = {
-  Collection: ["Running", "Basketball", "Lifestyle", "Training"],
+  Category: ["Running", "Basketball", "Lifestyle", "Training"],
 };
 
 export default function Navbar() {
