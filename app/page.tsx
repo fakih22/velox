@@ -4,7 +4,7 @@ import Navbar from "../src/components/Navbar";
 import Hero from "../src/components/Hero";
 import AnnouncementBar from "../src/components/AnnouncementBar";
 import FeaturedCollection from "../src/components/FeaturedCollection";
-import ShopByCategory from "../src/components/ShopByCategory";
+import AboutVelox from "../src/components/AboutVelox";
 import WhyChooseUs from "../src/components/WhyChooseUs";
 import AllProducts from "../src/components/BestSellers";
 import Testimonials from "../src/components/Testimonials";
@@ -22,7 +22,7 @@ export default function Home() {
         <AnnouncementBar />
         <FeaturedCollection />
         <AllProducts />
-        <ShopByCategory />
+        <AboutVelox />
         <WhyChooseUs />
         <Stats />
         <Testimonials />

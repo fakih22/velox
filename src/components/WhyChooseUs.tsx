@@ -13,7 +13,7 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section id="about" className="relative py-24 sm:py-28">
+    <section id="why-us" className="relative py-24 sm:py-28">
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeader
           eyebrow="Why Choose Us"
