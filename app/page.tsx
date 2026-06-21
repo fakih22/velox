@@ -6,7 +6,7 @@ import AnnouncementBar from "../src/components/AnnouncementBar";
 import FeaturedCollection from "../src/components/FeaturedCollection";
 import ShopByCategory from "../src/components/ShopByCategory";
 import WhyChooseUs from "../src/components/WhyChooseUs";
-import BestSellers from "../src/components/BestSellers";
+import AllProducts from "../src/components/BestSellers";
 import Testimonials from "../src/components/Testimonials";
 import Stats from "../src/components/Stats";
 import MobileApp from "../src/components/MobileApp";
@@ -21,9 +21,9 @@ export default function Home() {
         <Hero />
         <AnnouncementBar />
         <FeaturedCollection />
+        <AllProducts />
         <ShopByCategory />
         <WhyChooseUs />
-        <BestSellers />
         <Stats />
         <Testimonials />
         <MobileApp />
