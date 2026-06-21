@@ -15,17 +15,10 @@ export default function FeaturedCollection() {
             highlight="Bold"
             subtitle="Hand-picked premium sneakers that blend cutting-edge tech with iconic design."
           />
-          <a
-            href="#best-sellers"
-            className="group hidden items-center gap-2 text-sm font-semibold text-white/70 transition-colors hover:text-white sm:flex"
-          >
-            View All
-            <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-          </a>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredProducts.map((p, i) => (
+          {featuredProducts.slice(0, 4).map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
           ))}
         </div>
