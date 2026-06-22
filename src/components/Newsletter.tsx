@@ -56,7 +56,7 @@ export default function Newsletter() {
               </button>
             </form>
             <p className="mt-4 text-xs text-white/60">
-              No spam. Unsubscribe anytime. We respect your privacy.
+              No spam. Unsubscribe anytime. We respect your privacy
             </p>
           </motion.div>
         </div>
