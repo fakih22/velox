@@ -64,7 +64,7 @@ export default function Footer() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-white/40">
             <a href="#" className="transition-colors hover:text-white">Privacy Policy.</a>
-            <a href="#" className="transition-colors hover:text-white">Terms & Conditions</a>
+            <a href="#" className="transition-colors hover:text-white">Terms & Conditions.</a>
             <a href="#" className="transition-colors hover:text-white">Cookie Settings</a>
           </div>
         </div>
