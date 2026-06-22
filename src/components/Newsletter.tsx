@@ -49,14 +49,14 @@ export default function Newsletter() {
                 className="group flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-crimson transition-transform hover:scale-105"
               >
                 {done ? (
-                  <><Check size={16} /> Subscribed!</>
+                  <><Check size={16} /> Subscribed!!!</>
                 ) : (
                   <>Subscribe <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></>
                 )}
               </button>
             </form>
             <p className="mt-4 text-xs text-white/60">
-              No spam. Unsubscribe anytime. We respect your privacy
+              No spam. Unsubscribe anytime. We respect your privacy.
             </p>
           </motion.div>
         </div>
