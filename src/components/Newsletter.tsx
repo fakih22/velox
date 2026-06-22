@@ -28,7 +28,7 @@ export default function Newsletter() {
               <Mail size={26} className="text-white" />
             </div>
             <h2 className="mt-6 text-3xl font-bold text-white sm:text-4xl">
-              Join the VELOX Inner Circle
+              Join the VELOX Inner Circle.
             </h2>
             <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/80">
               Subscribe for early access to limited drops, exclusive member pricing, and the latest
